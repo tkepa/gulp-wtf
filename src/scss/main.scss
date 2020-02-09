@@ -1,16 +1,485 @@
 @import "_normalize";
 @import "_variables";
 
-
 html {
-  box-sizing: border-box;
+
+    box-sizing: border-box;
+
 }
 
 *, *:before, *:after {
-  box-sizing: inherit;
+
+    box-sizing: inherit;
+
+}
+body {
+    min-width: 100vh;
+
+    @media screen and (max-width: $mediaWidth){
+        min-width: auto;
+    }
 }
 
-body {
-  color: $yellow;
-  background: $violet;
+.container {
+    display: grid;
+    grid-template-columns: $columnTemplate;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "header header header"
+        "banner banner banner"
+        "wrapper wrapper wrapper"
+        "form form form"
+        "footer footer footer";
+
+        @media screen and (max-width: $mediaWidth){
+            text-align: center;
+            grid-template-columns: 1fr;
+        }
+}
+
+.header {
+    background: $orange1;
+    background: radial-gradient(circle, $orange1 50%, $orange2 100%);
+    grid-area: header;
+    height: 50px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 50%);
+    position: relative;
+
+    @media screen and (max-width: $mediaWidth){
+        min-height: 50px;
+        height: auto;
+    }
+}
+
+.nav {
+    &__menu {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        max-width: $maxWidth;
+        padding: 0;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__switcher {
+        display: none;
+    }
+
+    &__link {
+        font-family: $oswald;
+        text-decoration: none;
+        font-size: 16px;
+        color: #fff;
+        margin: 0 20px;
+    }
+
+    &__link:hover{
+        color: rgb(28,51,69);
+        animation-duration: 1s;
+        animation-name: ho;
+    }
+
+    @keyframes ho {
+        from {
+            color: #fff
+        }
+        to {
+            color: $navHover;
+        }
+    }
+
+    @media screen and (max-width: $mediaWidth){
+        &__switcher {
+            display: block;
+            margin-left: auto;
+            margin-right: 5%;
+            margin-top: 15px;
+            background: none;
+            border: solid 1px $navHover;
+            border-radius: 2px;
+            color: $navHover;
+        }
+    
+        &__switcher:hover {
+            background-color: $navHover;
+            color: #fff;
+            animation-name: switcher;
+            animation-duration: 1s;
+        }
+    
+        @keyframes switcher {
+            from {
+                background: none;
+                color:  $navHover;
+            }
+            to {
+                background-color: $navHover;
+                color: #fff;
+            }
+        }
+    
+        &__menu {
+            display: none;
+    
+        }
+    
+        &__menu--visible{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            
+        }
+    
+    
+        &__link {
+            &:hover{
+                color: $navHover;
+                animation-duration: 1s;
+                animation-name: ho; 
+            }
+
+        }
+    }
+    
+}
+
+.banner {
+    grid-area: banner;    
+    background: $bannerColor1;
+    background: radial-gradient(circle, $bannerColor1 33%, $bannerColor2 73%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 300px;
+
+    &__container {
+        font-family: $cursive;
+    }
+
+    &__heading {
+        font-size: 40px;
+        color: #fff;
+    }
+
+    &__paragraph {
+        font-size: 20px;
+        color: #fff;
+    }
+
+}
+
+.wrapper {
+    grid-area: wrapper;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px -2px 3px 0px rgba(0, 0, 0, 50%);
+    background: $wrapperColor1;
+    background: radial-gradient(circle, $wrapperColor1 33%, $wrapperColor2 73%);
+    padding-top: 20px;
+    padding-bottom: 30px;
+
+    &__header {
+        max-width: $maxWidth;
+        text-align: center;
+        margin: 0;
+    }
+
+    &__heading {
+        font-family: $cursive;
+        font-size: 40px;
+        color: $navHover;
+        margin: 0 0;
+    }
+
+    &__paragraph {
+        font-family: $lato;
+        color: $navHover;
+    }
+
+    @media screen and (max-width: $mediaWidth){
+        &__header {
+            text-align: center;
+            margin: 0;
+        }
+    }
+}
+
+.highlights {
+    max-width: $maxWidth;
+    display: grid;
+    grid-template-columns: $columnTemplate;
+    grid-template-rows: auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-areas: 
+            "highlights__content highlights__content highlights__content"
+            "highlights__content highlights__content highlights__content";
+    
+    &__content {
+        max-width: 300px;
+        border-radius: 5px; 
+        background: $navHover;
+        background: radial-gradient(circle, $navHover 33%, $highlightsColor 73%);
+        padding: 5px;
+        text-align: center;
+    }
+
+    &__image {
+        width: 25%;
+        margin: 5px auto;
+        fill: #fff;
+    }
+
+    &__heading {
+        margin: 0 0;
+        color: #fff;
+        font-family: $cursive;
+        font-size: 20px;
+    }
+
+    &__paragraph {
+        color: #fff;
+        font-family: $lato;
+        font-size: 14px;
+    }
+
+    @media screen and (max-width: $mediaWidth){
+        &__header {
+            grid-template-columns: auto;
+            grid-template-areas: 
+                    "highlights__content";
+        }
+    }
+
+}
+
+.form {
+    grid-area: form;
+    background: $navHover;
+    background: radial-gradient(circle, $navHover 33%, $highlightsColor 73%);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 20px;
+
+    &__header {
+        font-family: $cursive;
+        color: $wrapperColor1;
+        font-size: 40px;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+
+    &__container {
+        max-width: $maxWidth;
+        width: $maxWidth;
+        display: grid;
+        grid-template-columns: $columnTemplate;
+        grid-template-rows: auto;
+        grid-column-gap: 30px;
+        grid-template-areas: "name surname age"
+                            "phone email password"
+                            "range message message"
+                            "answear message message"
+                            "inputs inputs inputs"
+                            "check check file"
+                            ". submit .";
+        font-family: 'Lato', sans-serif;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    &__input {
+        height: 30px;
+        border-radius: 5px;
+        box-shadow: none;
+        border: none;
+        width: 250px;
+        max-width: 250px;
+    }
+
+    &__name {
+        grid-area: name;
+        height: 30px;
+        border-radius: 5px;
+    }
+
+    &__surname {
+        grid-area: surname;
+    }
+
+    &__age {
+        grid-area: age;
+    }
+
+    &__telephone {
+        grid-area: phone;
+    }
+
+    &__email {
+        grid-area: email;
+    }
+
+    &__password {
+        grid-area: password;
+    }
+
+    &__range {
+        grid-area: range;
+    }
+
+    &__radio {
+        grid-area: inputs;
+        border: none;
+        color: #fff;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__check--container {
+        grid-area: check;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__checkbox {
+        text-align: center;
+    }
+
+    &__answear {
+        grid-area: answear;
+    }
+
+    &__message {
+        grid-area: message;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__textarea {
+        max-width: 600px;
+        height: 150px;
+        border-radius: 5px;
+        margin: 0;
+        border: none;
+    }
+
+    &__button {
+        grid-area: submit;
+        width: 150px;
+        height: 30px;
+        background-color: $navHover;
+        border-radius: 5px;
+        border: solid 1px $formColor;;
+        color: #FFF;
+    }
+
+    &__button:hover {
+        animation-name: colorChange;
+        animation-duration: 1s;
+        background-color: $formButtonColor;
+    }
+
+    @keyframes colorChange {
+        from {
+            background-color: $navHover;
+        }
+    
+        to {
+            background-color: $formButtonColor;
+        }
+    }
+
+    &__file {
+        grid-area: file;
+        display: flex; 
+
+        &--input {
+            display: none;
+        }
+
+        &--label {
+            width: 100px;
+            height: 30px;
+            background-color: $navHover;
+            border-radius: 5px;
+            border: solid 1px $formColor;
+            color: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+                animation-name: colorChange;
+                animation-duration: 1s;
+                background-color: $formButtonColor;
+            }
+        }
+    }
+
+    @media screen and (max-width: $mediaWidth){
+        &__container {
+            width: auto;
+            grid-template-columns: auto;
+            grid-template-areas: "name" 
+                                "surname"
+                                "age"
+                                "phone"
+                                "email"
+                                "password"
+                                "range" 
+                                "answear"
+                                "message"
+                                "inputs"
+                                "check"
+                                "file"
+                                "submit";
+            grid-row-gap: 10px;
+            font-family: $lato;
+        }
+
+        &__radio {
+            width: auto;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        &__legend {
+            margin: 0 auto;
+        }
+
+        &__check {
+            &--container {
+                grid-area: check;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center; 
+            }
+        }
+
+        &__message {
+            grid-area: message;
+            display: flex;
+            justify-content: center;
+        }
+
+        &__textarea {
+            border-radius: 5px;
+            margin: 0;
+            border: none;
+        }
+
+        &__file {
+            display: flex;
+            justify-content: center;
+        }
+    }
 }

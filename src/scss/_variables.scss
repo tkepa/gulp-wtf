@@ -1,2 +1,21 @@
-$violet: #000;
-$yellow: #F9C802;
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato|ZCOOL+QingKe+HuangYou&display=swap');
+
+
+$oswald: 'Oswald', sans-serif;
+$lato: 'Lato', sans-serif;
+$cursive: 'ZCOOL QingKe HuangYou', cursive;
+$orange1:rgba(255,177,93,1);
+$orange2: rgba(245,152,76,1);
+$maxWidth: 960px;
+$navHover: rgba(28,51,69, 1);
+$bannerColor1: rgba(242,95,92,1);
+$bannerColor2: rgba(204,80,77,1);
+$wrapperColor1: rgb(255,184,85);
+$wrapperColor2: rgba(255,158,60,1);
+$highlightsColor: rgba(24,43,58,1);
+$columnTemplate: 1fr 1fr 1fr;
+$formColor: rgba(255, 255, 255, 20%);
+$formButtonColor: rgb(12, 85, 141);
+
+$mediaWidth: 800px;
